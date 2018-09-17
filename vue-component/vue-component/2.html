@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Components</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <tbody is="my-component"></tbody>
+        </table>
+    </div>
+    <script>
+        // is属性来挂载组件，将table中的内容替换了，.vue中没有限制。因为是es6模板
+        Vue.component('my-component', {
+            template: '<div>Table</div>'
+        });
+        new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>

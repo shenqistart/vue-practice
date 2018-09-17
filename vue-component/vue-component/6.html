@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Components</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <!-- <app inline-template> -->
+        <app>
+            <div>
+                <slot></slot>
+            </div>
+        </app>
+    </div>
+    <script>
+        Vue.component('app', {
+            template: '\
+            <div>\
+              Hello\
+              <slot name="a"> 来自子组件的slot默认内容</slot>\
+            </div>\
+            \
+            ',
+            data () {
+                return {
+                    message: '你好'
+                }
+            }
+        });
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'world'
+            },
+            mounted(){
+                // this.$slot.a
+            }
+        })
+    </script>
+</body>
+</html>

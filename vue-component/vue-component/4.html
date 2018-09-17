@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Components</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ value }}
+        <!--  注意这个语法糖 -->
+        <my-com v-model="value"></my-com>
+        <button @click="handleMinus">-1</button>
+    </div>
+    <script>
+        Vue.component('my-com', {
+            // input上要用value
+            props: {
+                value: {
+                    type: Number
+                }
+            },
+            template: '<div>{{ currentValue }}<button @click="handleClick">+1</button></div>',
+            data () {
+                return {
+                    currentValue: this.value
+                }
+            },
+            // 父向子
+            watch: {
+                value (val) {
+                    this.currentValue = val;
+                }
+            },
+            methods: {
+                handleClick () {
+                    this.currentValue ++;
+                    // 组件上的事件，给注册组件名
+                    this.$emit('input', this.currentValue);
+                    // this.$emit('handleMinus', this.currentValue);
+                }
+            }
+        });
+        new Vue({
+            el: '#app',
+            data: {
+                value: 1
+            },
+            // 父向子
+            methods: {
+                handleMinus () {
+                    this.value --;
+                }
+            }
+        })
+        // 注意这个语法糖
+        // <input v-model="something">
+        // <input v-bind:value="something" v-on:input="something = $event.target.value">
+    </script>
+</body>
+</html>

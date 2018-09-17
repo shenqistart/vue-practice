@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Components</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{value}}
+        <component-a v-model="value"></component-a>
+    </div>
+    <script>
+        Vue.component('component-a',{
+            template:'<div>{{msg}}<button @click="handleClick">传递事件</button></div>',
+            data(){
+                return{
+                    msg:1
+                }
+            },
+            methods:{
+                handleClick(){
+                    this.msg++;
+                    
+                }
+            }
+        })
+        new Vue({
+            el:'#app',
+            data:{
+                value:1,
+            },
+
+        })
+    </script>
+</body>
+</html>
