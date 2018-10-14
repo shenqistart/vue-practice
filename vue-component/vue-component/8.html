@@ -13,6 +13,7 @@
         </script>
     </div>
     <script>
+        // 异步组件，到什么时候才开始加载promise中的使用
         Vue.component('child-component', function (resolve, reject) {
             window.setTimeout(function () {
                 resolve({

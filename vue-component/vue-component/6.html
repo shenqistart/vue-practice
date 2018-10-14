@@ -7,12 +7,16 @@
 </head>
 <body>
     <div id="app">
-        {{message}}
+        
         <!-- <app inline-template> -->
-        <app>
+        <!-- <app>
             <div>
                 <slot></slot>
             </div>
+        </app> -->
+        <app>
+                {{message}}
+            <!-- {{message}} -->    
         </app>
     </div>
     <script>
@@ -20,15 +24,12 @@
             template: '\
             <div>\
               Hello\
-              <slot name="a"> 来自子组件的slot默认内容</slot>\
+            //   <slot name="a"> 来自子组件的slot默认内容</slot>\
+              <slot></slot>\
             </div>\
             \
             ',
-            data () {
-                return {
-                    message: '你好'
-                }
-            }
+
         });
         new Vue({
             el: '#app',

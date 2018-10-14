@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Components</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-component :init-count="count"></my-component> 
+          
+    </div>
+    <script>
+        const child={
+            props:{
+                initCount:Number,
+            },
+            template:'<div>hello world{{count}}/<button @click="change">count</button></div>' ,
+            data(){
+                return {
+                    count:this.initCount
+                }
+            },
+
+            methods:{
+                change(){
+                    this.count++;
+                }
+            }
+           
+        }
+        new Vue({
+            el:'#app',
+            components:{
+                'myComponent':child
+            },
+            data:{
+                count:1
+            }
+        })
+    </script>
+</body>
+</html>

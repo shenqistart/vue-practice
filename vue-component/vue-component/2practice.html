@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Components</title>
+    <script src="vue.js"></script>
+    <!-- <my-component></my-component> -->
+</head>
+<body>
+    <div id="app">
+        <table>
+            <tbody is="my-component"></tbody>
+        </table>
+    </div>
+    <script>
+        const Child={
+            'template':'<div>我是局部注册的组件</div>',
+        };
+        new Vue({
+            // 组件没有el的东西
+            el: '#app',
+            // 左边是dom，右边是组件的内容就是一个对象内容
+            components: {
+                'my-component': Child
+            },
+
+        })
+    </script>
+</body>
+</html>

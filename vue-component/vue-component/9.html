@@ -6,6 +6,7 @@
     <script src="vue.js"></script>
 </head>
 <body>
+    动态的创建Vue
     <div id="app">
         Hello Vue
     </div>
@@ -13,7 +14,8 @@
         const myComponent = Vue.extend({
             template: '<div>from extend</div>'
         });
-
+        // $mount的参数
+        // 不是直接new Vue
         new myComponent().$mount('#app');
     </script>
 </body>

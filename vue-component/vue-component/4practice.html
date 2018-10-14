@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Components</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{value}}
+        <my-com v-model="value"></my-com>
+        <button @click="minus">-</button>
+    </div>
+    <script>
+        const Child = {
+            template: '<div>{{innerValue}}<button @click="handleClick">+</button></div>',
+            data() {
+                return {
+                    innerValue: this.value
+                }
+            },
+            props: {
+                value: Number,
+            },
+            methods: {
+                handleClick() {
+                    this.innerValue++;
+                    this.$emit('input',this.innerValue);
+                }
+            },
+            watch:{
+                value(val){
+                    this.innerValue=val;
+                }
+            }
+        }
+        new Vue({
+            el: '#app',
+            components: {
+                'my-com': Child
+            },
+            data: {
+                value: 1
+            },
+            methods: {
+                minus() {
+                    this.value--;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
