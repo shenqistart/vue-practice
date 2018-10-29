@@ -1,6 +1,8 @@
+// 插件的写法
 const install = function (Vue) {
     const Bus = new Vue({
         methods: {
+            // 提交数据
             emit (event, ...args) {
                 this.$emit(event, ...args);
             },
@@ -18,7 +20,7 @@ const install = function (Vue) {
 
         }
     });
-
+// 继承到vue实例中
     Vue.prototype.$bus = Bus;
 };
 

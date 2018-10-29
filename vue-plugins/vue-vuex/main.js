@@ -52,7 +52,7 @@ router.afterEach((to, from, next) => {
     window.scrollTo(0, 0);
 });
 
-
+// 多层的嵌套
 const moduleA = {
     state: {},
     mutations: {},
@@ -77,14 +77,17 @@ const moduleB = {
 
 
 
-
+// store的实例下面建立状态
 const store = new Vuex.Store({
-    // vuex 配置
+    // vuex 配置，基础的就是读和写
     state: {
         count: 0,
         list: [1, 5, 8, 10, 30, 50]
     },
+    // 只能显示的调用，而不能在方法中直接等于的去改
+    // commit在异步后不知道什么时候触发
     mutations: {
+        // es6写法n的默认值是1
         increment (state, n = 1) {
             state.count += n;
         },
@@ -92,7 +95,13 @@ const store = new Vuex.Store({
             state.count --;
         }
     },
+    // 类比计算属性
     getters: {
+        // 原本的
+        filteredList: (state) => {
+            return state.list.filter(item => item > 10);
+        },
+        // 在自己的基础上用其他的getter
         filteredList: (state, getters) => {
             return state.list.filter(item => item > 10);
         },
@@ -100,6 +109,7 @@ const store = new Vuex.Store({
 
         }
     },
+    // 处理异步的做法和mutation很像
     actions: {
         increment (context) {
             // pending\resolved\rejected
@@ -120,13 +130,6 @@ const store = new Vuex.Store({
             // }).catch(val => {
             //     console.log(val);
             // });
-
-
-
-
-
-
-            // context.commit('increment');
             return new Promise(resolve => {
                 setTimeout(() => {
 
@@ -141,6 +144,7 @@ const store = new Vuex.Store({
             // }, 1000)
         }
     },
+    // 在vuex还有这些东西
     modules: {
         a: moduleA,
         b: moduleB
